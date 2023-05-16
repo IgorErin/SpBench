@@ -45,7 +45,7 @@ namespace benchmark {
         typedef T second_argument_type;
         typedef T result_type;
         __thrust_exec_check_disable__
-        __host__ __device__ T operator()(const T &lhs, const T &rhs) const {return lhs | rhs;}
+        __host__ __device__ T operator()(const T &lhs, const T &rhs) const {return lhs + rhs;}
     };
 
     template<typename T>
@@ -55,18 +55,20 @@ namespace benchmark {
         typedef T second_argument_type;
         typedef T result_type;
         __thrust_exec_check_disable__
-        __host__ __device__ T operator()(const T &lhs, const T &rhs) const {return lhs & rhs;}
+        __host__ __device__ T operator()(const T &lhs, const T &rhs) const {return lhs * rhs;}
     };
 
-    typedef bool value_type;
-    static const value_type t = true;
+    typedef float value_type;
+    static const value_type t = 1.0f;
 
     class Multiply: public BenchmarkBase {
     public:
 
         Multiply(int argc, const char** argv) {
             argsProcessor.parse(argc, argv);
+
             assert(argsProcessor.isParsed());
+            assert(8 * sizeof (float) == 32) // single
 
             benchmarkName = "Cusp-Multiply";
             experimentsCount = argsProcessor.getExperimentsCount();

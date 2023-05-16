@@ -82,7 +82,7 @@ namespace benchmark {
             size_t n = input.nrows;
             assert(input.nrows == input.ncols);
 
-            GrB_CHECK(GrB_Matrix_new(&A, GrB_BOOL, n, n));
+            GrB_CHECK(GrB_Matrix_new(&A, GrB_FP32, n, n));
 
             std::vector<GrB_Index> I(input.nvals);
             std::vector<GrB_Index> J(input.nvals);
@@ -92,7 +92,7 @@ namespace benchmark {
             for (auto i = 0; i < input.nvals; i++) {
                 I[i] = input.rows[i];
                 J[i] = input.cols[i];
-                X[i] = true;
+                X[i] = 1.0f;
             }
 
             GrB_CHECK(GrB_Matrix_build_BOOL(A, I.data(), J.data(), X, input.nvals, GrB_FIRST_BOOL));
@@ -112,7 +112,7 @@ namespace benchmark {
         }
 
         void execIteration(size_t experimentIdx, size_t iterationIdx) override {
-            GrB_CHECK(GrB_mxm(R, nullptr, nullptr, GrB_LOR_LAND_SEMIRING_BOOL, A, A, nullptr));
+            GrB_CHECK(GrB_mxm(R, nullptr, nullptr, GrB_PLUS_TIMES_SEMIRING_FP32, A, A, nullptr));
         }
 
         void tearDownIteration(size_t experimentIdx, size_t iterationIdx) override {
