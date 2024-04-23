@@ -1,5 +1,5 @@
 % File name and path | isUndirected | num iteration
-data/wing/wing.mtx                              1   10
+data/dataset/wing.mtx                           1   10
 data/luxembourg_osm/luxembourg_osm.mtx          1   10
 data/amazon0312/amazon0312.mtx                  0   10
 data/amazon-2008/amazon-2008.mtx                0   10

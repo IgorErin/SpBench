@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.15)
 project(SpBench LANGUAGES CXX CUDA)
 
 # Exposed options. Disable something, if do not want to build cuda or cl stuff.
-option(BENCH_WITH_CUBOOL      "Add cubool lib and related benchmarks" ON)
-option(BENCH_WITH_CUSP        "Add cusp lib and related benchmarks" ON)
-option(BENCH_WITH_CUSPARSE    "Add cuSPARSE lib and related benchmarks" ON)
-option(BENCH_WITH_CLSPARSE    "Add clSPARSE lib and related benchmarks" ON)
-option(BENCH_WITH_CLBOOL      "Add clbool lib and related benchmarks" ON)
+option(BENCH_WITH_CUBOOL      "Add cubool lib and related benchmarks" OFF)
+option(BENCH_WITH_CUSP        "Add cusp lib and related benchmarks" OFF)
+option(BENCH_WITH_CUSPARSE    "Add cuSPARSE lib and related benchmarks" OFF)
+option(BENCH_WITH_CLSPARSE    "Add clSPARSE lib and related benchmarks" OFF)
+option(BENCH_WITH_CLBOOL      "Add clbool lib and related benchmarks" OFF)
 option(BENCH_WITH_SUITESPARSE "Add GraphBLAS:SuiteSparse lib and related benchmarks" ON)
 
 add_library(sp_bench_base INTERFACE)
@@ -199,7 +199,7 @@ file(COPY ${SCRIPTS} DESTINATION ${CMAKE_BINARY_DIR})
 
 # Unpack data for benchmarks into build directory
 add_custom_target(unzip_dataset ALL)
-set(DATASET_ARCHIVES dataset0.zip dataset1.zip)
+set(DATASET_ARCHIVES dataset.zip)
 
 foreach(ARCHIVE_NAME ${DATASET_ARCHIVES})
     add_custom_command(TARGET unzip_dataset PRE_BUILD
